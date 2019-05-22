@@ -1,0 +1,15 @@
+<?xml version = "1.0" encoding = "utf-8" ?>
+
+<!--********** Copyright 2016 Roku Corp.  All Rights Reserved. **********-->
+
+<component name="Homepage" extends="Scene">
+ 	<children>
+      <Label id="myLabel" 
+      	text="Hello World!"
+      	width="1280" 
+      	height="720" 
+      	horizAlign="center"
+      	vertAlign="center"
+      	/>
+    </children>
+</component>
