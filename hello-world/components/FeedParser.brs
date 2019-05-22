@@ -40,12 +40,35 @@ Function GetContentFeed() 'This function retrieves and parses the feed and store
     end for
     return result ' Returns the array
 End Function
+
 Sub Init()
     m.top.functionName = "loadContent"
 End Sub
 
 Sub loadContent()
-    list = GetContentFeed()
+    oneRow = GetContentFeed()
+    list = [
+        'first row in the grid with 3 items across
+        {
+            Title:"Row One"
+            ContentList : SelectTo(oneRow, 3)
+        }
+        'second row in the grid with 5 items across
+        {
+            Title:"Row Two"
+            ContentList : SelectTo(oneRow, 5, 3)
+        }
+        'third row in the grid with 5 items across
+        {
+            Title:"Row Three"
+            ContentList : SelectTo(oneRow, 5, 8)
+        }
+        'fourth row in the grid with the remaining 2 items
+        {
+            Title:"Row Four"
+            ContentList : SelectTo(oneRow, 5, 13)
+        }
+    ]
     m.top.content = ParseXMLContent(list)
 End Sub
 
@@ -64,4 +87,15 @@ Function ParseXMLContent(list As Object) 'Formats content into content nodes so 
         RowItems.appendChild(row)
     end for
     return RowItems
+End Function
+
+Function SelectTo(array as Object, num = 25 as Integer, start = 0 as Integer) as Object 'This method copies an array up to the defined number "num" (default 25)
+    result = []
+    for i = start to array.count()-1
+        result.push(array[i])
+        if result.Count() >= num
+            exit for
+        end if
+    end for
+    return result
 End Function
