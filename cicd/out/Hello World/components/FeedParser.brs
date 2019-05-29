@@ -1,10 +1,10 @@
 Function GetContentFeed() 'This function retrieves and parses the feed and stores each content item in a ContentNode
+    print "[GetContentFeed()]"
     url = CreateObject("roUrlTransfer") 'component used to transfer data to/from remote servers
     url.SetUrl("http://api.delvenetworks.com/rest/organizations/59021fabe3b645968e382ac726cd6c7b/channels/1cfd09ab38e54f48be8498e0249f5c83/media.rss")
     rsp = url.GetToString() 'convert response into a string
 
     responseXML = ParseXML(rsp) 'Roku includes it's own XML parsing method
-
     if responseXML<>invalid then  'Fall back in case Roku's built in XML Parse method fails
         responseXML = responseXML.GetChildElements() 'Access content inside Feed
         responseArray = responseXML.GetChildElements()
@@ -42,10 +42,12 @@ Function GetContentFeed() 'This function retrieves and parses the feed and store
 End Function
 
 Sub Init()
+print "[FeedParser:::init()]"
     m.top.functionName = "loadContent"
 End Sub
 
 Sub loadContent()
+print "[loadContent()]"
     oneRow = GetContentFeed()
     list = [
         'first row in the grid with 3 items across
@@ -73,6 +75,7 @@ Sub loadContent()
 End Sub
 
 Function ParseXMLContent(list As Object) 'Formats content into content nodes so they can be passed into the RowList
+    print "[ParseXMLContent()]"
     RowItems = createObject("RoSGNode","ContentNode")
     'Content node format for RowList: ContentNode(RowList content) --<Children>-> ContentNodes for each row --<Children>-> ContentNodes for each item in the row)
     for each rowAA in list
@@ -81,7 +84,10 @@ Function ParseXMLContent(list As Object) 'Formats content into content nodes so 
 
         for each itemAA in rowAA.ContentList
             item = createObject("RoSGNode","ContentNode")
-            item.SetFields(itemAA)
+            ' We don't use item.setFields(itemAA) as doesn't cast streamFormat to proper value
+            for each key in itemAA
+                item[key] = itemAA[key]
+            end for
             row.appendChild(item)
         end for
         RowItems.appendChild(row)
@@ -89,7 +95,16 @@ Function ParseXMLContent(list As Object) 'Formats content into content nodes so 
     return RowItems
 End Function
 
+Function ParseXML(str As String) As dynamic 'Takes in the content feed as a string
+print "[ParseXML()]"
+    if str = invalid return invalid  'if the response is invalid, return invalid
+    xml = CreateObject("roXMLElement") '
+    if not xml.Parse(str) return invalid 'If the string cannot be parsed, return invalid
+    return xml 'returns parsed XML if not invalid
+End Function
+
 Function SelectTo(array as Object, num = 25 as Integer, start = 0 as Integer) as Object 'This method copies an array up to the defined number "num" (default 25)
+    print "[SelectTo()]"
     result = []
     for i = start to array.count()-1
         result.push(array[i])

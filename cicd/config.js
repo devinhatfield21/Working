@@ -42,6 +42,12 @@ const config = {
             "description": "__Project1 Description",
             "path": "./hello-world",
             "dependencies": [""]
+        },
+        "Sample": {
+            "name": "Hello World",
+            "description": "__Project1 Description",
+            "path": "./Sample",
+            "dependencies": [""]
         }
     },
     "mode": {

@@ -24,37 +24,7 @@
             End Sub]]>
     </script>
     <children>
-        <Poster id="poster">
-        </Poster>
-        <Rectangle
-                 id = "Overhang"
-                 height = "400"
-                 width = "1920"
-                  color = "0x000000FF"
-                  opacity = "0.5"
-                />
-            <Group
-                   translation = "[150,75]">
-                <Label
-                    id = "Title"
-                    height = "30"
-                    width = "650"
-                    font = "font:LargeBoldSystemFont"/>
-                <Label
-                    id = "Description"
-                    height = "250"
-                    width = "800"
-                    color = "0xA3A3C2FF"
-                    translation = "[0,75]"
-                    wrap = "true"/>
-                <Poster
-                    id = "Poster"
-                    height = "281"
-                    width = "500"
-                    loadWidth = "500"
-                    loadHeight = "281"
-                    loadDisplayMode = "scaleToFit"
-                    translation = "[850,10]"/>
-                </Group>
+    <Poster id="poster">
+        </Poster>      
     </children>
 </component> 

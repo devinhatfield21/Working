@@ -6,7 +6,7 @@ sub Main()
     screen.setMessagePort(m.port)
 
     'Create a scene and load /components/helloworld.xml'
-    scene = screen.CreateScene("PosterItem")
+    scene = screen.CreateScene("HomeScene")
     screen.show()
 
     while(true)
