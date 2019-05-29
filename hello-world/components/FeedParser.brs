@@ -3,7 +3,6 @@ Function GetContentFeed() 'This function retrieves and parses the feed and store
     url = CreateObject("roUrlTransfer") 'component used to transfer data to/from remote servers
     url.SetUrl("http://api.delvenetworks.com/rest/organizations/59021fabe3b645968e382ac726cd6c7b/channels/1cfd09ab38e54f48be8498e0249f5c83/media.rss")
     rsp = url.GetToString() 'convert response into a string
-
     responseXML = ParseXML(rsp) 'Roku includes it's own XML parsing method
     if responseXML<>invalid then  'Fall back in case Roku's built in XML Parse method fails
         responseXML = responseXML.GetChildElements() 'Access content inside Feed
