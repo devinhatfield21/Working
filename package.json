@@ -44,7 +44,7 @@
     "eslint-plugin-roku": "file:cicd/plugins/eslint-plugin-roku",
     "jscpd": "^2.0.13",
     "json2csv": "^4.3.3",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.6",
     "node-watch": "^0.5.9",
     "pre-commit": "^1.2.2",
     "prompt": "^1.0.0",
